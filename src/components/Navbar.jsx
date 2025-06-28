@@ -41,7 +41,7 @@ export const Navbar = () => {
             <span className="text-glow text-foreground transition-all duration-300">
               Sush
             </span>{" "}
-            &lt;Dev&gt;
+            Dev
           </span>
         </a>
 

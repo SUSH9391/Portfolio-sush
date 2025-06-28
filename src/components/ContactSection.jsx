@@ -54,8 +54,7 @@ export const ContactSection = () => {
                     Get In <span className="text-primary"> Touch</span>
                 </h2>
                 <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-                    Have a project in mind or wnat to collabroate? Fell free to reach out.
-                    I'm always open to discussing new opportunities.
+                    Got a project you're passionate about? Or want to team up on something new? I'd love to hear from you. I'm always eager to explore new collaborations and opportunities.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 pag-12">
                     <div className="space-y-8">
