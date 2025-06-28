@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -24,73 +25,91 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <nav
-      className={cn(
-        "fixed w-full z-40 transition-all duration-300",
-        isScrolled
-          ? "py-3 bg-white/10 backdrop-blur-lg border-b border-white/10 shadow-md"
-          : "py-5"
-      )}
-    >
-      <div className="container flex items-center justify-between">
-        <a
-          className="text-xl font-bold text-primary flex items-center"
-          href="#hero"
-        >
-          <span className="relative z-10">
-            <span className="text-glow text-foreground transition-all duration-300">
-              Sush
-            </span>{" "}
-           &lt;Dev&gt;
-          </span>
-        </a>
+    <>
+      <nav
+        className={cn(
+          "fixed w-full z-40 h-20 transition-all duration-300",
+          isScrolled
+            ? "bg-white/10 backdrop-blur-lg border-b border-white/10 shadow-md"
+            : ""
+        )}
+      >
+        <div className="flex items-center justify-between h-full px-4 md:px-8">
+          <a
+            className="text-xl font-bold text-primary flex items-center"
+            href="#hero"
+          >
+            <span className="relative z-10">
+              <span className="text-glow text-foreground transition-all duration-300">
+                Sush
+              </span>{" "}
+              &lt;Dev&gt;
+            </span>
+          </a>
 
-        {/* desktop nav */}
-        <div className="hidden md:flex space-x-8">
-          {navItems.map((item, key) => (
-            <a
-              key={key}
-              href={item.href}
-              className="text-foreground/80 hover:text-primary transition-colors duration-300"
-            >
-              {item.name}
-            </a>
-          ))}
-        </div>
-
-        {/* mobile toggle button */}
-        <button
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden p-2 text-foreground z-50"
-          aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}{" "}
-        </button>
-
-        {/* mobile nav menu */}
-        <div
-          className={cn(
-            "fixed inset-0 bg-white/10 backdrop-blur-md border border-white/10 z-40 flex flex-col items-center justify-center",
-            "transition-all duration-300 md:hidden",
-            isMenuOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          )}
-        >
-          <div className="flex flex-col space-y-8 text-xl">
+          {/* desktop nav */}
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, key) => (
               <a
                 key={key}
                 href={item.href}
                 className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
               </a>
             ))}
+            <div className="ml-4">
+              <ThemeToggle />
+            </div>
           </div>
+
+          {/* mobile menu toggle */}
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="md:hidden p-2 text-foreground z-50"
+            aria-label="Open Menu"
+          >
+            <Menu size={28} />
+          </button>
         </div>
+      </nav>
+
+      {/* mobile full screen menu */}
+      <div
+        className={cn(
+          "fixed inset-0 bg-black/90 backdrop-blur-sm text-white z-50 flex flex-col items-center justify-center space-y-10 md:hidden transition-all duration-300",
+          isMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        )}
+      >
+        {/* Close button inside mobile menu */}
+        <button
+          onClick={() => setIsMenuOpen(false)}
+          className="absolute top-5 right-5 text-white"
+          aria-label="Close Menu"
+        >
+          <X size={28} />
+        </button>
+
+        {navItems.map((item, key) => (
+          <a
+            key={key}
+            href={item.href}
+            onClick={() => setIsMenuOpen(false)}
+            className="text-2xl font-medium hover:text-primary transition-colors duration-300"
+          >
+            {item.name}
+          </a>
+        ))}
+
+        <ThemeToggle />
       </div>
-    </nav>
+
+      {/* push content below navbar */}
+      <div className="pt-24 px-4 md:px-8">
+        {/* Your actual sections go here */}
+      </div>
+    </>
   );
 };

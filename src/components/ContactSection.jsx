@@ -1,10 +1,17 @@
-import { Mail, Phone, Map, Linkedin, Instagram, Send } from "lucide-react"
-import { cn } from "@/lib/utils"
+import {
+    Instagram,
+    Linkedin,
+    Mail,
+    MapPin,
+    Phone,
+    Send,
+    Twitch,
+    Twitter,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import emailjs from '@emailjs/browser';
-import { Toaster, toast } from 'react-hot-toast';
-import { useToast } from "../hooks/use-toast";
-
 
 
 export const ContactSection = () => {
@@ -45,82 +52,88 @@ export const ContactSection = () => {
                 setIsSubmitting(false);
             });
     };
+
     return (
-        <section
-            id="contact"
-            className="py-24 px-4 relative bg-secondary/30">
+        <section id="contact" className="py-24 px-4 relative bg-secondary/30">
             <div className="container mx-auto max-w-5xl">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
                     Get In <span className="text-primary"> Touch</span>
                 </h2>
+
                 <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
                     Got a project you're passionate about? Or want to team up on something new? I'd love to hear from you. I'm always eager to explore new collaborations and opportunities.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 pag-12">
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div className="space-y-8">
                         <h3 className="text-2xl font-semibold mb-6">
-                             Contact Information
+                            {" "}
+                            Contact Information
                         </h3>
-                        <div className="space-y-6 justify-center">
-                            <div className="flex items-start space-x-4"> {/* Mali */}
-                                <div className="p-3 rounded-full bg-primary/10">
-                                    <Mail className="h-6 w-6 text-primary" />
-                                </div>
 
+                        <div className="space-y-6 justify-center">
+                            <div className="flex items-start space-x-4">
+                                <div className="p-3 rounded-full bg-primary/10">
+                                    <Mail className="h-6 w-6 text-primary" />{" "}
+                                </div>
                                 <div>
                                     <h4 className="font-medium"> Email</h4>
-                                    <a href="mailto:sushmitha_baliga_b@outlook.com" className="text-muted-foreground hover:text-primary transition-colors">
+                                    <a
+                                        href="mailto:sushmitha_baliga_b@outlook.com"
+                                        className="text-muted-foreground hover:text-primary transition-colors"
+                                    >
                                         sushmitha_baliga_b@outlook.com
                                     </a>
                                 </div>
-
                             </div>
-
-                            <div className="flex items-start space-x-4"> {/*Phone */}
+                            <div className="flex items-start space-x-4">
                                 <div className="p-3 rounded-full bg-primary/10">
-                                    <Phone className="h-6 w-6 text-primary" />
+                                    <Phone className="h-6 w-6 text-primary" />{" "}
                                 </div>
-
                                 <div>
                                     <h4 className="font-medium"> Phone</h4>
-                                    <a href="tel:+91 8073542847" className="text-muted-foreground hover:text-primary transition-colors">
+                                    <a
+                                        href="tel:+918073542847"
+                                        className="text-muted-foreground hover:text-primary transition-colors"
+                                    >
                                         +91 8073542847
                                     </a>
                                 </div>
-
                             </div>
-
-
-                            <div className="flex items-start space-x-4">{/*Location */}
+                            <div className="flex items-start space-x-4">
                                 <div className="p-3 rounded-full bg-primary/10">
-                                    <Map className="h-6 w-6 text-primary" />
+                                    <MapPin className="h-6 w-6 text-primary" />{" "}
                                 </div>
-
                                 <div>
                                     <h4 className="font-medium"> Location</h4>
                                     <a className="text-muted-foreground hover:text-primary transition-colors">
-                                        India
+                                        India, Bangalore
                                     </a>
                                 </div>
                             </div>
                         </div>
+
                         <div className="pt-8">
-                            <h4 className="font-medium mb-4">Connect With Me</h4>
+                            <h4 className="font-medium mb-4"> Connect With Me</h4>
                             <div className="flex space-x-4 justify-center">
-                                <a href="https://www.linkedin.com/in/sushmithabaligab31/" target="_black">
+                                <a href="https://www.linkedin.com/in/sushmithabaligab31/" target="_blank">
                                     <Linkedin />
                                 </a>
-                                <a href="https://www.instagram.com/_.xsushhhhx._" target="_black">
+                                
+                                <a href="https://www.instagram.com/_.xsushhhhx._/" target="_blank">
                                     <Instagram />
                                 </a>
-
+                                
                             </div>
                         </div>
                     </div>
 
-                    {/* contact form */}
-                    <div className="bg-card p-8 rounded-lg shadow-xs">
-                        <h3 className="text-2xl font-semibold mb-6"> Send a Message </h3>
+                    <div
+                        className="bg-card p-8 rounded-lg shadow-xs"
+                        onSubmit={handleSubmit}
+                    >
+                        <h3 className="text-2xl font-semibold mb-6"> Send a Message</h3>
+
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div>
                                 <label htmlFor="name"
@@ -173,9 +186,8 @@ export const ContactSection = () => {
                         </form>
 
                     </div>
-
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
